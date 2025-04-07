@@ -1,4 +1,3 @@
-// DOM Elements
 const registerForm = document.getElementById('registerForm');
 const loginForm = document.getElementById('loginForm');
 const registerMessage = document.getElementById('registerMessage');
@@ -8,7 +7,6 @@ const protectedContent = document.getElementById('protectedContent');
 const logoutBtn = document.getElementById('logoutBtn');
 const getDataBtn = document.getElementById('getDataBtn');
 
-// сюда url бэкенда
 const API_BASE_URL = 'http://localhost:3000';
 
 registerForm.addEventListener('submit', async (e) => {
@@ -59,12 +57,10 @@ loginForm.addEventListener('submit', async (e) => {
         const data = await response.json();
         
         if (response.ok) {
-            // Store the token
             localStorage.setItem('jwtToken', data.token);
             showMessage(loginMessage, 'Успешный вход! <3', 'success');
             loginForm.reset();
             
-            // Show protected section
             protectedSection.classList.remove('hidden');
         } else {
             showMessage(loginMessage, data.message || 'Ошибка авторизации.', 'error');
@@ -111,7 +107,7 @@ getDataBtn.addEventListener('click', async () => {
     }
 });
 
-document.addEventListener('DOMContentLoaded', () => { // проверяет, залогинен ли пользователь
+document.addEventListener('DOMContentLoaded', () => { 
     const token = localStorage.getItem('jwtToken');
     if (token) {
         protectedSection.classList.remove('hidden');
